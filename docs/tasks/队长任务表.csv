@@ -1,0 +1,78 @@
+﻿周次,阶段,任务ID,负责人,任务,产出物,依赖,验收标准,预估工时h,优先级
+W0,立项,W0-01,P2队长,建仓库与目录骨架、配CI与issue看板,仓库可clone且CI跑通,无,他人能clone并跑make lint,3,P0
+W0,立项,W0-02,P2队长,编写并冻结OpenAPI v0（17个接口）,docs/api/openapi.yaml,无,W1四人全部按此开发;Swagger可加载,5,P0
+W0,立项,W0-03,P1,领域模型表与预警阈值表（示例值可配置）,docs领域模型章节,无,四人评审通过;阈值全部来自配置,4,P0
+W0,立项,W0-04,P3,Agent方案调研与编排器设计（状态机+检查点）,docs/ai/orchestrator.md,无,能画出PLAN-ACT-OBSERVE状态图,4,P0
+W0,立项,W0-05,P4,前端设计规范与6张页面线框图,线框图,无,配色与字号统一;大屏布局定稿,3,P0
+W0,立项,W0-06,P2队长,跑通AstrBot与飞书机器人Webhook验证,可发消息的群机器人,无,群里收到一条测试卡片,2,P1
+W1,骨架,W1-01,P1,模拟器v0（单站纯降雨可复现seed）,data/simulator/,W0-03,同seed两次输出一致;生成30天数据,6,P0
+W1,骨架,W1-02,P1,站点与流域种子数据（24站3流域）,data/seeds/stations.csv,W0-03,含经纬度与阈值字段;可被API读取,3,P0
+W1,骨架,W1-03,P2,FastAPI骨架与接口1/2/4/5,backend/app/,W0-02,Swagger可点通;返回mock数据,8,P0
+W1,骨架,W1-04,P2,数据库模型与Alembic迁移（station/observation/alert）,backend/app/models/,W1-03,make migrate可升降级,5,P0
+W1,骨架,W1-05,P3,工具层v0（query_stations+query_observations）与LLM客户端,agent/tools/,W0-04,单测mock LLM通过;超时生效,6,P0
+W1,骨架,W1-06,P3,简报Prompt v1与BriefingOutput schema,agent/prompts/v1_briefing.md,无,能对固定输入产出合法JSON,4,P0
+W1,骨架,W1-07,P4,前端工程初始化（Vite+TS+AntD+ECharts）与请求层,frontend/,W0-05,能拉接口2并渲染列表,6,P0
+W1,骨架,W1-08,P4,大屏静态页与自绘SVG流域图,frontend/src/pages/Dashboard,无,1920下不溢出;断网仍显示,8,P0
+W2,垂直切片,W2-01,P1,模拟器v1（30天1min雨量水位流量）,data/seeds/demo_30d.parquet,W1-01,生成<5s;含故障注入开关,8,P0
+W2,垂直切片,W2-02,P2,规则引擎v0（YAML DSL+安全求值3条规则）,backend/app/services/rule_engine.py,W0-02,3条规则命中正确;无eval,10,P0
+W2,垂直切片,W2-03,P2,告警接口6/7与Redis事件推送,backend/app/api/v1/alerts.py,W2-02,告警可查;事件可订阅,6,P0
+W2,垂直切片,W2-04,P3,编排器v0（单步工具调用+校验+降级）,agent/orchestrator.py,W1-05,给定告警能生成简报,10,P0
+W2,垂直切片,W2-05,P4,告警列表页与详情抽屉,frontend/src/pages/Alerts,W2-03,能筛选分页看证据,8,P0
+W2,垂直切片,W2-06,P4,WS订阅与实时刷新,frontend/src/services/ws.ts,W2-03,新告警3s内上屏,5,P0
+W2,垂直切片,W2-07,P2队长,M1垂直切片演示录屏,mp4,W2-01;W2-04;W2-06,S2全链路跑通;断网可放,3,P0
+W3,闭环,W3-01,P1,数据质检L0-L2（范围跳变卡死z-score）,algo/quality.py,W2-01,注入故障召回≥85%;输出可读解释,8,P1
+W3,闭环,W3-02,P2,告警状态机（表驱动+角色校验+审计）,backend/app/services/state_machine.py,W2-03,单测覆盖全部转移;非法转移409,10,P0
+W3,闭环,W3-03,P2,接口8/9（confirm/close）与audit_log,backend/app/api/v1/alerts.py,W3-02,操作有审计记录;幂等生效,5,P0
+W3,闭环,W3-04,P3,工具扩到5个（eval_rules+search_plan）,agent/tools/,W2-04,参数非法可拒绝并重试,6,P0
+W3,闭环,W3-05,P3,结构化输出校验与失败重试2次,agent/orchestrator.py,W3-04,成功率100%（含降级）,5,P0
+W3,闭环,W3-06,P4,告警确认交互与状态流转UI,frontend/src/pages/Alerts,W3-03,点击后状态与列表同步,6,P0
+W3,闭环,W3-07,P4,站点详情页（时序图+阈值线+异常标注）,frontend/src/pages/StationDetail,W1-03,阈值线正确;异常点高亮,8,P1
+W4,知识,W4-01,P1,多站点空间相关与故障矩阵（4类故障）,data/simulator/,W2-01,4类故障均可注入且可复现,6,P1
+W4,知识,W4-02,P2,JWT登录与RBAC三角色,backend/app/core/security.py,W1-03,越权返回403;有单测,6,P0
+W4,知识,W4-03,P2,接口16 metrics/summary,backend/app/api/v1/metrics.py,W2-03,大屏KPI数据正确,4,P0
+W4,知识,W4-04,P3,RAG v1（预案入库切分top-k检索）,agent/rag/,无,能检索到带页码片段,10,P0
+W4,知识,W4-05,P3,引用溯源校验（quote匹配度>0.9）,agent/rag/verify.py,W4-04,编造引用被剔除并置fallback,5,P0
+W4,知识,W4-06,P4,规则配置页（列表编辑热加载提示）,frontend/src/pages/Rules,W3-03,改规则10s内生效,6,P2
+W4,知识,W4-07,P4,大屏接真实metrics与告警流,frontend/src/pages/Dashboard,W4-03,数据5s刷新一次,5,P0
+W5,渠道,W5-01,P1,场景脚本格式定稿与5个场景,data/scenarios/,W2-01,格式冻结;可被回放引擎读取,5,P0
+W5,渠道,W5-02,P2,APScheduler调度与去重冷却抑制,backend/app/workers/scheduler.py,W3-02,告警风暴场景下条数≤3,8,P0
+W5,渠道,W5-03,P2,飞书卡片推送服务,backend/app/services/notify.py,W0-06,群里收到带按钮卡片,5,P0
+W5,渠道,W5-04,P3,简报完整版（结论依据建议三段）,agent/prompts/v2_briefing.md,W4-05,含至少1条真实引用;不编造数值,8,P0
+W5,渠道,W5-05,P4,飞书卡片按钮回调联调,回调接口,W5-03,点确认能回写告警状态,5,P1
+W5,渠道,W5-06,P4,场景回放页v1（时间轴播放）,frontend/src/pages/Scenarios,W5-01,支持1x/60x速度,8,P1
+W6,M2,W6-01,P1,20个场景与评测指标v1（命中误报提前量）,docs/eval/评测报告.md,W5-01,跑批<10min;指标有公式,10,P0
+W6,M2,W6-02,P2,压测（10万条查询）与幂等校验,压测报告,无,P95<200ms;重复key返回首次结果,6,P0
+W6,M2,W6-03,P3,降级路径（超时转模板）与token成本统计,agent/,W5-04,断网可输出模板简报,5,P0
+W6,M2,W6-04,P4,M2演示脚本与联调,mp4,W6-01;W6-02;W6-03,S1与S2各90s内讲完,5,P0
+W7,深化,W7-01,P1,STL分解与IsolationForest多站联合,algo/anomaly.py,W6-01,误报率较L2有下降并记录,10,P1
+W7,深化,W7-02,P1,误报归因分析与阈值调优建议,algo/,W7-01,输出top5误报原因,5,P1
+W7,深化,W7-03,P2,接口11/12联调与限流,backend/,W6-03,单用户10QPS不5xx,6,P1
+W7,深化,W7-04,P3,RAG hybrid（BM25+向量RRF）与rerank,agent/rag/,W4-04,Recall@5≥0.8,10,P1
+W7,深化,W7-05,P4,图表联动与空态错误态,frontend/,W1-07,空数据不白屏,6,P1
+W8,交互,W8-01,P1,场景扩到35个（含边界7个）,data/scenarios/,W6-01,边界覆盖阈值±5%,5,P1
+W8,交互,W8-02,P2,接口13 /chat SSE打通,backend/app/api/v1/chat.py,W7-03,事件序列符合契约,5,P0
+W8,交互,W8-03,P3,多轮对话与工具选择策略,agent/,W8-02,能回答哪个站最危险,10,P0
+W8,交互,W8-04,P4,对话页与流式渲染,frontend/src/pages/Chat,W8-02,首字<2s;可展开思考过程,8,P1
+W9,加固,W9-01,P1,场景扩到50个与边界数据,data/scenarios/,W6-01,全量跑批通过,6,P1
+W9,加固,W9-02,P2,审计报表健康检查备份脚本,backend/,W3-03,健康检查含LLM探活,6,P1
+W9,加固,W9-03,P3,工具白名单与MCP风格工具描述,agent/tools/,W3-04,副作用工具自动流程拒绝,6,P1
+W9,加固,W9-04,P4,大屏动效与演示模式（一键播放）,frontend/,W5-06,现场可一键跑完S2,8,P0
+W10,M3,W10-01,P1,评测报告初稿与指标复核,评测报告,W6-01,含5图1表,8,P0
+W10,M3,W10-02,P2,性能优化与日志埋点,压测报告,W6-02,P95复测达标,6,P1
+W10,M3,W10-03,P3,幻觉抽样审计（30条人工核）,docs/eval/幻觉审计.md,W5-04,编造率<5%并记录,6,P0
+W10,M3,W10-04,P4,E2E用例10条,frontend/e2e/,W9-04,全绿,6,P1
+W10,M3,W10-05,P2队长,功能冻结评审与砍范围决策,冻结清单,无,M3验收标准逐条过,3,P0
+W11,文档,W11-01,P1,评测报告终稿与图表,评测报告,无,可独立阅读,6,P1
+W11,文档,W11-02,P2,部署文档与README,README与deploy/,无,干净机器3分钟起全栈,5,P0
+W11,文档,W11-03,P3,技术文档（架构编排工具RAG）,docs/tech/,无,答辩可照讲,6,P1
+W11,文档,W11-04,P4,使用手册与截图,使用手册,无,非技术读者能看懂,5,P2
+W12,回归,W12-01,P1,复现并修复数据算法bug,bug列表,无,P0 bug清零,8,P0
+W12,回归,W12-02,P2,全量回归与部署演练,bug列表,无,零P0,8,P0
+W12,回归,W12-03,P3,Prompt调优与失败案例分析,audit,无,失败率下降,6,P1
+W12,回归,W12-04,P4,全流程录屏素材,素材,无,三段场景各一版,6,P1
+W13,交付,W13-01,P4,演示视频剪辑（5分钟内）,mp4,W12-04,能讲完3场景,8,P0
+W13,交付,W13-02,P3,答辩技术部分讲稿,PPT备注,无,8分钟,5,P0
+W13,交付,W13-03,P2,干净机器部署演练截图,部署证据,无,一次成功,4,P0
+W13,交付,W13-04,P1,答辩数据支撑（指标卡片图）,PPT素材,无,数字与报告一致,3,P1
+W14,答辩,W14-01,全员,彩排3次（掐表8分钟）,彩排记录,无,超时<30s,6,P0
+W14,答辩,W14-02,全员,现场环境兜底（离线快照+预录视频）,U盘,无,断网可完整演示,2,P0

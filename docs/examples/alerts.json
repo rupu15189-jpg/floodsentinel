@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "id": "AL-20260720-0002",
+      "station_id": "L-001",
+      "level": "yellow",
+      "status": "confirmed",
+      "title": "城西水位站水位 5.26m，超警戒水位",
+      "evidence": [
+        {
+          "metric": "water_level",
+          "value": 5.26,
+          "threshold": 5.0,
+          "op": ">=",
+          "window": "realtime",
+          "note": "超过警戒水位 5.00m"
+        }
+      ],
+      "dedup_key": "L-001:yellow",
+      "triggered_at": "2026-07-20T06:55:00+08:00",
+      "confirmed_by": "值班员-张三",
+      "confirmed_at": "2026-07-20T07:01:00+08:00",
+      "closed_at": null,
+      "close_reason": null
+    },
+    {
+      "id": "AL-20260720-0001",
+      "station_id": "R-001",
+      "level": "orange",
+      "status": "pending",
+      "title": "城西雨量站 1 小时雨量 68.2mm，达橙色预警",
+      "evidence": [
+        {
+          "metric": "rainfall_1h",
+          "value": 68.2,
+          "threshold": 50,
+          "op": ">=",
+          "window": "1h",
+          "note": "1 小时雨量达到橙色阈值"
+        }
+      ],
+      "dedup_key": "R-001:orange",
+      "triggered_at": "2026-07-20T06:40:00+08:00",
+      "confirmed_by": null,
+      "confirmed_at": null,
+      "closed_at": null,
+      "close_reason": null
+    }
+  ],
+  "total": 2,
+  "page": 1,
+  "page_size": 20
+}

@@ -1,0 +1,443 @@
+[
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:00:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 0.8,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:05:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 1.0,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:10:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 1.4,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:15:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 2.2,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:20:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 3.2,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:25:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 4.2,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:30:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 5.4,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:35:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 7.1,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:40:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 9.2,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:45:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 11.4,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:50:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 13.5,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T04:55:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 16.6,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:00:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 19.5,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:05:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 22.2,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:10:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 25.2,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:15:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 27.8,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:20:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 30.8,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:25:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 34.0,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:30:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 37.0,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:35:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 40.0,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:40:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 42.8,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:45:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 45.6,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:50:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 48.6,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T05:55:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 51.0,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:00:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 53.4,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:05:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 56.2,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:10:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 59.1,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:15:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 62.1,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:20:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 64.3,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:25:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 66.2,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:30:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 67.5,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:35:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 68.1,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:40:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 68.2,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:45:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 68.0,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:50:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 67.1,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T06:55:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 65.7,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:00:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 63.7,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:05:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 61.1,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:10:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 57.8,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:15:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 53.8,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:20:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 50.1,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:25:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 45.9,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:30:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 42.5,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:35:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 38.5,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:40:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 34.7,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:45:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 30.8,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:50:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 27.3,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T07:55:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 23.7,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  },
+  {
+    "station_id": "R-001",
+    "ts": "2026-07-20T08:00:00+08:00",
+    "metric": "rainfall_1h",
+    "value": 20.3,
+    "unit": "mm",
+    "quality": "ok",
+    "source": "seed"
+  }
+]

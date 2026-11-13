@@ -1,0 +1,717 @@
+openapi: 3.1.0
+info:
+  title: FloodSentinel
+  description: 防汛监测预警智能体平台 · 后端服务（W1 骨架版）
+  version: 0.1.0
+paths:
+  /api/health:
+    get:
+      tags:
+      - system
+      summary: 健康检查
+      operationId: health_api_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Health Api Health Get
+  /api/stations:
+    get:
+      tags:
+      - station
+      summary: 站点列表
+      operationId: list_stations_api_stations_get
+      parameters:
+      - name: basin_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 流域编号，如 城西
+          title: Basin Id
+        description: 流域编号，如 城西
+      - name: type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 站点类型 rain/level/waterlog
+          title: Type
+        description: 站点类型 rain/level/waterlog
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StationOut'
+                title: Response List Stations Api Stations Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/stations/{station_id}/observations:
+    get:
+      tags:
+      - station
+      summary: 站点历史时序
+      operationId: list_observations_api_stations__station_id__observations_get
+      parameters:
+      - name: station_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Station Id
+      - name: from
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 起始时间，ISO8601
+          title: From
+        description: 起始时间，ISO8601
+      - name: to
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 结束时间，ISO8601
+          title: To
+        description: 结束时间，ISO8601
+      - name: metric
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metric
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 20000
+          minimum: 1
+          default: 5000
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObservationOut'
+                title: Response List Observations Api Stations  Station Id  Observations Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/observations/latest:
+    get:
+      tags:
+      - station
+      summary: 多站点最新观测值
+      operationId: latest_observations_api_observations_latest_get
+      parameters:
+      - name: station_ids
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 逗号分隔，如 R-001,L-001
+          title: Station Ids
+        description: 逗号分隔，如 R-001,L-001
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ObservationOut'
+                title: Response Latest Observations Api Observations Latest Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/alerts:
+    get:
+      tags:
+      - alert
+      summary: 告警列表
+      operationId: list_alerts_api_alerts_get
+      parameters:
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: pending/confirmed/closed
+          title: Status
+        description: pending/confirmed/closed
+      - name: level
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: blue/yellow/orange/red
+          title: Level
+        description: blue/yellow/orange/red
+      - name: station_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Station Id
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Page Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertPage'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/alerts/{alert_id}/confirm:
+    post:
+      tags:
+      - alert
+      summary: 人工确认告警
+      operationId: confirm_alert_api_alerts__alert_id__confirm_post
+      parameters:
+      - name: alert_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Alert Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmIn'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/alerts/{alert_id}/close:
+    post:
+      tags:
+      - alert
+      summary: 关闭告警
+      operationId: close_alert_api_alerts__alert_id__close_post
+      parameters:
+      - name: alert_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Alert Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloseIn'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/reports/generate:
+    post:
+      tags:
+      - report
+      summary: 生成值班简报
+      operationId: generate_report_api_reports_generate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateReportIn'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/scenarios:
+    get:
+      tags:
+      - scenario
+      summary: 场景列表
+      operationId: list_scenarios_api_scenarios_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ScenarioOut'
+                type: array
+                title: Response List Scenarios Api Scenarios Get
+  /api/scenarios/{scenario_id}/replay:
+    post:
+      tags:
+      - scenario
+      summary: 回放场景
+      operationId: replay_scenario_api_scenarios__scenario_id__replay_post
+      parameters:
+      - name: scenario_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Scenario Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/ReplayIn'
+              - type: 'null'
+              title: Body
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplayOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AlertOut:
+      properties:
+        id:
+          type: string
+          title: Id
+        station_id:
+          type: string
+          title: Station Id
+        level:
+          type: string
+          title: Level
+        status:
+          type: string
+          title: Status
+        title:
+          type: string
+          title: Title
+        evidence:
+          items: {}
+          type: array
+          title: Evidence
+        dedup_key:
+          type: string
+          title: Dedup Key
+        triggered_at:
+          type: string
+          format: date-time
+          title: Triggered At
+        confirmed_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Confirmed By
+        confirmed_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Confirmed At
+        closed_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Closed At
+        close_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Close Reason
+      type: object
+      required:
+      - id
+      - station_id
+      - level
+      - status
+      - title
+      - dedup_key
+      - triggered_at
+      title: AlertOut
+    AlertPage:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/AlertOut'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+        page:
+          type: integer
+          title: Page
+        page_size:
+          type: integer
+          title: Page Size
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - page_size
+      title: AlertPage
+    CloseIn:
+      properties:
+        operator:
+          type: string
+          maxLength: 32
+          minLength: 1
+          title: Operator
+        reason:
+          type: string
+          maxLength: 200
+          minLength: 1
+          title: Reason
+      type: object
+      required:
+      - operator
+      - reason
+      title: CloseIn
+    ConfirmIn:
+      properties:
+        operator:
+          type: string
+          maxLength: 32
+          minLength: 1
+          title: Operator
+        remark:
+          anyOf:
+          - type: string
+            maxLength: 200
+          - type: 'null'
+          title: Remark
+      type: object
+      required:
+      - operator
+      title: ConfirmIn
+    GenerateReportIn:
+      properties:
+        alert_id:
+          type: string
+          maxLength: 32
+          minLength: 1
+          title: Alert Id
+      type: object
+      required:
+      - alert_id
+      title: GenerateReportIn
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ObservationOut:
+      properties:
+        station_id:
+          type: string
+          title: Station Id
+        ts:
+          type: string
+          format: date-time
+          title: Ts
+        metric:
+          type: string
+          title: Metric
+        value:
+          type: number
+          title: Value
+        unit:
+          type: string
+          title: Unit
+        quality:
+          type: string
+          title: Quality
+        source:
+          type: string
+          title: Source
+      type: object
+      required:
+      - station_id
+      - ts
+      - metric
+      - value
+      - unit
+      - quality
+      - source
+      title: ObservationOut
+    ReplayIn:
+      properties:
+        speed:
+          type: number
+          maximum: 3600.0
+          exclusiveMinimum: 0.0
+          title: Speed
+          default: 60
+      type: object
+      title: ReplayIn
+    ReplayOut:
+      properties:
+        replay_id:
+          type: string
+          title: Replay Id
+        scenario_id:
+          type: string
+          title: Scenario Id
+        speed:
+          type: number
+          title: Speed
+        started_at:
+          type: string
+          format: date-time
+          title: Started At
+        status:
+          type: string
+          title: Status
+          default: started
+      type: object
+      required:
+      - replay_id
+      - scenario_id
+      - speed
+      - started_at
+      title: ReplayOut
+    ReportOut:
+      properties:
+        id:
+          type: string
+          title: Id
+        alert_ids:
+          items: {}
+          type: array
+          title: Alert Ids
+        content_md:
+          type: string
+          title: Content Md
+        citations:
+          items: {}
+          type: array
+          title: Citations
+        model:
+          type: string
+          title: Model
+        fallback:
+          type: boolean
+          title: Fallback
+        latency_ms:
+          type: integer
+          title: Latency Ms
+        generated_at:
+          type: string
+          format: date-time
+          title: Generated At
+      type: object
+      required:
+      - id
+      - alert_ids
+      - content_md
+      - citations
+      - model
+      - fallback
+      - latency_ms
+      - generated_at
+      title: ReportOut
+    ScenarioOut:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        duration_min:
+          type: integer
+          title: Duration Min
+        seed:
+          type: integer
+          title: Seed
+        injections:
+          items: {}
+          type: array
+          title: Injections
+        expected:
+          type: object
+          title: Expected
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - duration_min
+      - seed
+      - injections
+      - expected
+      title: ScenarioOut
+    StationOut:
+      properties:
+        id:
+          type: string
+          title: Id
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+        type:
+          type: string
+          title: Type
+        lng:
+          type: number
+          title: Lng
+        lat:
+          type: number
+          title: Lat
+        basin_id:
+          type: string
+          title: Basin Id
+        warn_level:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Warn Level
+        guarantee_level:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Guarantee Level
+        history_max:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: History Max
+        status:
+          type: string
+          title: Status
+      type: object
+      required:
+      - id
+      - code
+      - name
+      - type
+      - lng
+      - lat
+      - basin_id
+      - status
+      title: StationOut
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+servers:
+- url: http://127.0.0.1:8000
+  description: 本地开发
