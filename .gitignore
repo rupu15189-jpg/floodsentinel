@@ -23,6 +23,11 @@ node_modules/
 dist/
 .vite/
 
+# 临时压缩包
+*.zip
+*.7z
+*.rar
+
 # 编辑器
 .idea/
 .vscode/
